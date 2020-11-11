@@ -1,0 +1,1013 @@
+\ProvidesPackage{ksh-thesis-template-settings}
+
+% \pdfcatalog{/ViewerPreferences<</PrintScaling/None>>} % pdfTeX low level command for \hypersetup{pdfprintscaling} of the hyperref package
+
+% ===============================================================
+%
+% ksh-thesis-template
+% Template Settings
+%
+% ===============================================================
+
+% To be able to easily use the settings of the ksh-thesis-template, they are put in this .sty-file so that they can be used in every document using
+%   \usepackage{ksh-thesis-template-settings}
+
+% The settings file is divided into the following sections:
+%   Packages providing pro­gram­ming fa­cil­i­ties
+%   Settings Input Defaults
+%   Document Class Options
+%   Language
+%   Typographic arrangement and text
+%   Coloring
+%   Table of Contents (ToC) and Heading Styling
+%   Page styles (includes headers, footers)
+%   Margin notes
+%   Bibliography
+%   Figures and Tables
+%   Equation typesetting
+%   Code typesetting
+%   Quotes
+%   Footnotes
+%   Selective text (for confidential content)
+%   PDF features
+%   Custom Packages
+%   Glossary
+
+% ===============================================================
+% Packages providing pro­gram­ming fa­cil­i­ties
+% ===============================================================
+\usepackage{etoolbox} % Provides among other things generic tests such as \ifdefstring, \ifnumequal, \ifdef
+\usepackage{calc}     % Provides calculation functionality with LaTeX units TODO: is it used?
+% \usepackage{morewrites} % solution for the error “no room for a new\write”, which occurswhen a document reserves too many streams to write data to various auxiliary files
+% \usepackage{scrwfile} % alternative to morewrites
+% 
+% ===============================================================
+
+
+% ===============================================================
+% Settings input defaults
+% ===============================================================
+
+% \providecommand{cmd}{defn}
+
+\providecommand{\varLanguage}{english,ngerman}
+\providecommand{\varDecimalMarker}{,}
+\providecommand{\varIsDraft}{false}
+\providecommand{\varIsConfidential}{false}
+\providecommand{\varPaperSize}{A4}
+\providecommand{\varFontSize}{12pt}
+\providecommand{\varIsTwoSided}{true}
+\providecommand{\varBindingWidth}{5mm}
+\providecommand{\varDIV}{calc}
+\providecommand{\varHasTwoColumns}{false}
+\providecommand{\varSpecifyPageLayoutManually}{false}
+\providecommand{\varParskip}{half}
+\providecommand{\varBibFile}{SampleBib.bib}
+\providecommand{\varCitationStyle}{numeric-comp}
+\providecommand{\varBibRefSegmentLevel}{none}
+
+\providecommand{\varUseColors}{true}
+\providecommand{\varPrintLocalToC}{true}
+\providecommand{\varPrintChapterThumbs}{true}
+\providecommand{\varColorMainTheme}{0, 84, 159}
+\providecommand{\varColorThumb}{0, 84, 159}
+\providecommand{\varColorToC}{182, 82, 86}
+\providecommand{\varMintedListings}{true}
+\providecommand{\varCacheHighlightedCode}{true}
+\providecommand{\leftlistingsskip}{30pt}
+\providecommand{\varUseHyperref}{true}
+
+\providecommand{\varAuthorGiven}{Author Given}
+\providecommand{\varAuthorFamily}{Author Family}
+\providecommand{\varStudentNumber}{399999}
+\providecommand{\varTitle}{Title}
+\providecommand{\varInstitute}{ISEA}
+\providecommand{\varSupervisor}{Supervisor Name}
+\providecommand{\varThesisExaminerA}{Univ.-Prof. Dr. Dirk Uwe Sauer}
+\providecommand{\varThesisExaminerB}{Univ.-Prof. Dr. ir. Dr. h.c. Rik W. De Doncker}
+\providecommand{\varSubject}{Arbeitstyp}
+\providecommand{\varFieldOfStudy}{Field of Study}
+\providecommand{\varSubmissionMonth}{Submission Month}
+\providecommand{\varSubmissionYear}{2019}
+\providecommand{\varDraftDate}{\today}
+\providecommand{\varSubmissionTown}{Aachen}
+\providecommand{\varKeywords}{}
+
+% 
+% ===============================================================
+
+
+% ===============================================================
+% Document class options
+% ===============================================================
+% 
+% The document class used by this template is the KOMA-Script class 'scrbook'. Documentation can be found at:
+%   German: http://mirrors.ctan.org/macros/latex/contrib/koma-script/doc/scrguide.pdf
+%   English: http://mirrors.ctan.org/macros/latex/contrib/koma-script/doc/scrguien.pdf
+%   CTAN: http://www.ctan.org/pkg/koma-script
+\@ifclassloaded{scrbook}{
+    \KOMAoptions{%
+    % General options
+        ,overfullrule=\varIsDraft%      % Display small black boxes at the end of overly long lines
+        ,titlepage=true%                % Use separate title page instead of in-page title (default)
+    % Page layout options
+        ,paper=\varPaperSize%           % Document paper-size    
+        ,fontsize=\varFontSize%         % Defaults font sizes: 10pt for standardclasses, 11pt for scrclasses
+        ,twoside=\varIsTwoSided%		% Set whether document is two-sided
+        ,twocolumn=\varHasTwoColumns%   % Set wether document has two columns
+        ,headinclude=false%             % Do not count header as part of the text body but as part of margin (default)
+        ,footinclude=false%             % Do not count footer as part of the text body but as part of margin (default)
+        ,mpinclude=false%               % Do not count marginal notes as part of text body (default)
+        ,BCOR=\varBindingWidth%		    % Set width of space reserved for binding (binding correction)
+    % Style options
+        ,parskip=\varParskip%           % Setting this option as false (default, recommended) results in: indentation at beginning of a paragraph and no vertical spacing between paragraphs
+        ,numbers=noendperiod            % Set number style of sectioning commands to omit a final point, e.g. 2.3.1 instead of 2.3.1.
+        ,cleardoublepage=empty          % Set page style of the interleaf page created by \cleardoublepage
+        ,headsepline=true         	    % Display horizontal rule beneath the header
+        ,footsepline=false              % Do not display horizontal rule above the footer
+        ,chapterprefix=true             % Settings this option true adds 'Chapter X' at the start of a chapter instead of starting with a number only
+        ,captions=tableheading          % Change formatting of table captions to have appropriate vertical spacing to be put above the table
+    % Table of Contents
+        ,toc=listof%                    % Give lists of floating environments, e.g. figures and tables, unnumbered entries in  table of contents.
+        ,toc=bib%                       % Give bibliography an unnumbered entry in table of contents
+        ,toc=idx%                       % Give index an unnumbered entry in table of contents
+        ,headings=normal%  		        % Use normal heading sizes, choose depending on paper size
+        ,numbers=noenddot%		        % Set all numbers of sectioning commands without a final point
+    }%
+
+    % Set which sectioning divisions are numbered
+    \setcounter{secnumdepth}{\subsubsectionnumdepth} % number from \part to \subsubsection
+
+    % Set which sectioning divisions are included in the table of contents
+    \setcounter{tocdepth}{\subsectiontocdepth} % include from \part to \subsection (default)
+}{}
+
+% 
+% ===============================================================
+
+
+% ===============================================================
+% Language language
+% ===============================================================
+% 
+\usepackage[\varLanguage]{babel}
+
+% The following name macros can be changed if they are supported by the documentclass:
+%   \abstractname
+%   \appendixname
+%   \bibname        % When using biblatex, use instead \DefineBibliographyStrings (biblatex.pdf)
+%   \chaptername
+%   \contentsname
+%   \figurename
+%   \indexname
+%   \listfigurename
+%   \listtablename:
+%   \partname
+%   \refname
+%   \tablename
+% Use the following macros defined by scrbase (automatically loaded by KOMA-Script classes)
+%   \newcaptionname{language}{LaTeX name}{new content}   % new name
+%   \renewcaptionname{language}{LaTeX name}{new content} % renew existing name
+
+% \renewcaptionname{ngerman}{\contentsname}{Inhalt}           %Table of contents
+% \renewcaptionname{ngerman}{\listfigurename}{Abbildungen}    %Figures
+% \renewcaptionname{ngerman}{\listtablename}{Tabellen}        %Tables
+% \renewcaptionname{ngerman}{\figurename}{Abb.}               %Figure
+% \renewcaptionname{ngerman}{\tablename}{Tab.}                %Table
+% % \renewcaptionname{ngerman}{\bibname}{Literatur}           %Bibliography
+%   \newcaptionname{ngerman}{\lstlistlistingname}{Quelltexte} %Table of listings 
+%   \newcaptionname{ngerman}{\lstlistingname}{Quelltext}      %Listing
+
+% 
+% ===============================================================
+
+
+% ===============================================================
+% Typographic arrangement and text
+% ===============================================================
+
+\usepackage[T1]{fontenc}        % Set font encoding to T1
+\usepackage[utf8]{inputenc}     % Set input encoding to uft8
+\usepackage{lmodern}            % Set font to latin modern (LaTeX default font)
+\KOMAoption{DIV}{\varDIV}       % Calculate page layout after loading the font (if \varDIV = calc)
+\usepackage{microtype}          % Enable micro-typographical features such as character protrusion and font expansion
+\usepackage{enumitem}           % Provides control over list en­vi­ron­ments (itemize, enumerate, description)
+
+% Provides \newgeometry (used in the title page)
+\ifdefstring{\varSpecifyPageLayoutManually}{true}{%
+    % Load geometry to set page layout later using \geometry{}
+    \usepackage{geometry}
+}{%
+    % Load geometry package without changing to the package layout, 
+    % original scrbook/scrartcl page layout is memorized here
+    \usepackage[pass]{geometry}
+}
+
+\usepackage{textcomp}           % Provides among others \textquotesingle, needed for listings option [upquote]
+\newcommand{\textitem}{\textbullet\hspace{\labelsep}} % bullet point for use outside of list {itemize} envrionment
+\newcommand*{\textcurlybraceleft}{\{}
+\newcommand*{\textcurlybraceright}{\}}
+
+% 
+% ===============================================================
+
+
+% ===============================================================
+% Coloring
+% ===============================================================
+% 
+\usepackage[%
+    ,table%     % Load colortbl package for coloring rows, columns, and cells within tables
+]{xcolor} %     % Provides access to colors, tints, shades, tones, and mixes of colors
+
+\usepackage{normalcolor} % Provides command to set up the default colour of \normalcolor
+
+
+\ifdefstring{\varUseColors}{true}{%
+    \definecolor{ColorMainTheme}{RGB}{\varColorMainTheme}
+    \definecolor{ColorToC}{RGB}{\varColorToC}
+    \definecolor{ColorThumb}{RGB}{\varColorThumb} % used in stylefile/chapterthumb.sty
+}{%
+    \definecolor{ColorMainTheme}{gray}{0}
+    \definecolor{ColorToC}{gray}{0}
+    \definecolor{ColorThumb}{gray}{0}
+}
+
+% color used for commands in minted environment %TODO: add to ifdefstring?
+\definecolor{mintedgreen}{RGB}{0,128,0}
+
+\@ifclassloaded{scrbook}{
+    % Apply color 'ColorMainTheme' to ToC
+    \addtokomafont{chapterentrypagenumber}{\color{ColorMainTheme}}
+    \addtokomafont{chapterentry}{\color{ColorMainTheme}}
+    \addtokomafont{partentry}{\color{ColorMainTheme}}
+}{}
+
+% Applying the color 'ColorMainTheme' to all headings except 'title'
+\addtokomafont{disposition}{\color{ColorMainTheme}}
+% Equivalent to \addtokomafont{disposition}{\color{ColorMainTheme}}:
+% \addtokomafont{partprefix}{\color{ColorMainTheme}}
+% \addtokomafont{part}{\color{ColorMainTheme}}
+% \addtokomafont{chapter}{\color{ColorMainTheme}}
+% \addtokomafont{section}{\color{ColorMainTheme}}
+% \addtokomafont{subsection}{\color{ColorMainTheme}}
+% \addtokomafont{subsubsection}{\color{ColorMainTheme}}
+% \addtokomafont{paragraph}{\color{ColorMainTheme}}
+% \addtokomafont{subparagraph}{\color{ColorMainTheme}}
+
+\addtokomafont{caption}{\color{ColorMainTheme}\footnotesize}
+\addtokomafont{captionlabel}{\color{ColorMainTheme}}
+%
+% ===============================================================
+
+
+% ===============================================================
+% Table of Contents (ToC) and Heading Styling
+% ===============================================================
+% 
+
+\@ifclassloaded{scrbook}{
+    % Add word "Part" to ToC
+    \renewcommand*{\addparttocentry}[2]{% Modify \addparttocentry to also add "Part"
+        \addtocentrydefault{part}{\partname\nobreakspace #1}{#2}%
+    }% 
+    \RedeclareSectionCommand[% Modify tocnumwidth-attribute of \part to prevent overlapping
+        tocnumwidth=4.5em             % default: 2em
+    ]{part}
+
+    % Change chapter heading size
+    \addtokomafont{chapterprefix}{\large}
+    % \addtokomafont{chapter}{\fontsize{30}{38}\selectfont}
+    \addtokomafont{chapter}{\Huge}
+
+    % Create local ToC after every chapter \localtableofcontents from the etoc-package by redefining the KOMA-Script command \chapterlineswithprefixformat
+    \usepackage{etoc}
+    \ifdefstring{\varPrintLocalToC}{true}{%
+        \renewcommand\chapterlineswithprefixformat[3]{%
+            #2#3%
+            \Ifstr{#1}{chapter}{%
+                \Ifstr{#2}{}{}{%
+                    \chapterheadendvskip\par\nobreak
+                    \color{ColorToC}%
+                    \resetnormalcolor
+                    \normalfont\normalsize
+                    \KOMAoptions{parskip=false}
+                    \etocsettocstyle{}{}% keine Überschrift
+                    \localtableofcontents
+                    \par\nobreak
+                    \KOMAoptions{parskip=\varParskip}
+                }%
+            }{}%
+        }%
+    }{}%
+}{
+    % false branch
+}
+
+% I wasn't able to put the commands written in 'appendix/startAppendix.tex' in a \newcommand without error messages, so as a workaround I include the file using \input and disguise it in \startappendix.
+\newcommand{\startappendix}{\input{appendix/startAppendix}}
+
+% New command for part preambles
+\newcommand{\includePartPreamble}[1]{%
+    \setpartpreamble[c][.5\columnwidth]{%
+        \vspace{15mm}
+        \input{#1}
+    }%
+}%
+
+%
+% ===============================================================
+
+
+% ===============================================================
+% Page styles (includes headers, footers)
+% ===============================================================
+% 
+\@ifclassloaded{scrbook}{
+    \usepackage[% KOMA-Script package for this purpose
+        autooneside,%
+    ]{scrlayer-scrpage}
+
+    % Use empty page style for pages with \part
+    \renewcommand*{\partpagestyle}{empty}
+    \renewcommand*{\chapterpagestyle}{plain}
+
+
+    % \DeclareNewLayer[
+    %     background,%    % Display layer in background only
+    %     contents={
+    %         \color{ColorMainTheme}
+    %         \rule{\paperwidth}{2cm}
+    %     }
+    % ]{chaptertopbar}
+    % \AddLayersAtBeginOfPageStyle{plain}{chaptertopbar}
+
+    % TODO: ist \pagestyle{scrheadings} so wie hier beschrieben?
+    % Setup general pagestyle
+    \pagestyle{scrheadings}	    % Apply page style to be used
+
+    % Set header/footer font and pagenumber font
+    \setkomafont{pageheadfoot}{%
+        \normalfont\sffamily%\bfseries
+    }
+    \setkomafont{pagenumber}{%
+        \normalfont\rmfamily
+    }
+
+    % Set header/footer of current page style (scrheadings)
+    \ohead{\pagemark}  % Display page number at outer header
+    \automark[section]{chapter} % Auswahl der automatisch zu generierenden Inhalte;
+        %% auf Hauptargument (hier 'chapter' = Kapitelname) wird durch \leftmark  zugegriffen;
+        %% Optionales Argument (hier 'section' = Abschnittsname) wird durch \rightmark ausgewählt
+    \lohead{% Display chapter name at left header on right/odd page
+        \textcolor{ColorMainTheme}{\rightmark}
+    } 
+    \rehead{% Display section name at left header on right/odd page 
+        \textcolor{ColorMainTheme}{\leftmark}
+    }
+    \ofoot{}\cfoot{}\ifoot{} % Display empty footer
+
+    % Add "Draft" watermark for drafts
+    \ifdefstring{\varIsDraft}{true}{%
+        \DeclareNewLayer[
+            background,%    % Display layer in background only
+            % mode=text,%     % Use text mode of layer’s content output (default)
+            % align = c,%
+            page,%      % Let layer span over entire text area
+            addvoffset=.3\textheight,%
+            contents={%
+                \makebox[\paperwidth][c]{
+                    \iflanguage{ngerman}{%
+                        \scalebox{2}{
+                            \rotatebox[origin=bc]{45}{
+                                \Huge\bfseries\textcolor{gray!20}{
+                                    V O R V E R S I O N
+                                }
+                            }
+                        }
+                    }{%
+                        \scalebox{3.1}{
+                            \rotatebox[origin=bc]{45}{
+                                \Huge\bfseries\textcolor{gray!20}{
+                                    D R A F T
+                                }
+                            }
+                        }
+                    }%
+                }
+            }
+        ]{watermark}
+        % \AddLayersToPageStyle{@everystyle@}{watermark}
+        \AddLayersToPageStyle{scrheadings}{watermark}
+        \AddLayersToPageStyle{empty}{watermark}
+        \AddLayersToPageStyle{plain}{watermark}
+    }{}
+
+    % Add chapter thumbs
+    % Control appearance in stylefile/chapterthumb.sty
+    \ifdefstring{\varPrintChapterThumbs}{true}{%
+        \usepackage{stylefile/chapterthumb}
+        \AddLayersToPageStyle{scrheadings}{chapterthumb}
+        \AddLayersToPageStyle{plain}{chapterthumb}
+        \addtokomafont{chapterthumb}{\bfseries}
+    }{}%
+}{
+    % false branch
+}
+
+% 
+% ===============================================================
+
+
+% ===============================================================
+% Margin notes
+% ===============================================================
+% 
+
+% This template uses KOMA-Script's scrlayer-notecolumn package for margin notes. It relies on the basic functionality of scrlayer and you can only output notes on pages that use a page style based on scrlayer.
+% According to scrguide.pdf, it is still in its early stages of development, so you can assume that there are still bugs in scrlayer-notecolumn.
+
+\usepackage{scrlayer-notecolumn}
+\setkomafont{notecolumn.marginpar}{\color{ColorToC}\sffamily\footnotesize}
+\newcommand{\marginnote}[1]{\makenote{#1}}
+
+% Alternatively, you can choose between using the marignnote package or KOMA-Scripts margin note implementation
+
+% marginnote package:
+%   - The marginnote package does not have any collision detection - marginal notes that are set near to each other can partially or totally overlap.
+%   - Depending on the settings used, \marginnote sometimes changes the baseline distance of the normal text.
+% % marginnote package
+% \usepackage{marginnote}
+% \renewcommand*{\marginfont}{\color{ColorToC}\sffamily\footnotesize}
+
+% % KOMA-Scripts marginnote implementation
+%   - Cannot be used inside floats/equations etc.
+% \newcommand{\marginnote}[1]{%
+%     % Margin notes placed at the very beginning of a paragraph are interpreted as placed between paragraphs, where LaTeX is still in vmode, leading to a wrong placement of the margin note. To prevent this, use \leavevmode to leave vertical mode and enter horizontal mode.
+%     \leavevmode%
+%     \marginline{\color{ColorToC}\sffamily\footnotesize#1}%
+%     \ignorespaces%
+% }%
+
+% 
+% ===============================================================
+
+
+% ===============================================================
+% Bibliography
+% ===============================================================
+% 
+\usepackage[% Bibliographic facilities
+    ,backend=biber%                     % Use biber to compile references
+    ,style=\varCitationStyle%           % For option values, see biblatex.pdf
+    ,minnames=1%
+    ,maxnames=2%
+    ,refsegment=\varBibRefSegmentLevel% % Add ability to print local bibliography
+]{biblatex}
+
+\ifdefstring{\varUseHyperref}{true}{%
+    \ExecuteBibliographyOptions{hyperref=true} % Transform citations into hyperlinks
+}{}%
+
+
+\ifdefstring{\varBibRefsegmentLevel}{none}{%
+    \newcommand{\printlocalbibliography}[1][]{template input `varBibRefsegmentLevel' is set to `none'}
+}{
+    \newcommand{\printlocalbibliography}[1][]{\printbibliography[segment=\therefsegment,#1]}
+}%
+
+\ifdefstring{\varBibRefsegmentLevel}{part}{%
+    \ExecuteBibliographyOptions{refsegment=part}
+}{}%
+\ifdefstring{\varBibRefsegmentLevel}{chapter}{%
+    \ExecuteBibliographyOptions{refsegment=chapter}
+}{}%
+
+\addbibresource{bibfile/\varBibFile} % Path to bibfile (include file extension!)
+
+\iflanguage{ngerman}{%
+    \DefineBibliographyStrings{ngerman}{%
+        bibliography = {Literaturverzeichnis}     % drucke "Literaturverzeichnis" statt nur "Literatur"
+    }
+	% \DefineBibliographyStrings{ngerman}{mathesis={Masterarbeit}}
+	% \DefineBibliographyStrings{ngerman}{phdthesis={Dissertation}}
+	\DefineBibliographyStrings{ngerman}{andothers={et\addabbrvspace al\adddot}} % aus u. a. zu et al. machen, \addabbrvspace um Zeilenumbruch bei et zu vermeiden (trotzdem möglich)
+}{}%
+
+% 
+% ===============================================================
+
+
+% ===============================================================
+% Figures and tables
+% ===============================================================
+% 
+\usepackage{graphicx}               % Add extended graphics support 
+\usepackage[extendedchars]{grffile} % Ex­tend file name pro­cess­ing of graph­ics-package to sup­port a larger range of file names
+
+\iflanguage{ngerman}{%
+    \newcommand{\varFigureName}{Abb.}
+}{}
+\iflanguage{english}{%
+    \newcommand{\varFigureName}{Fig.}
+}{}
+\usepackage[labelfont=bf,figurename=\varFigureName]{caption} % Customize captions in floating environments like figure and table
+\usepackage{subcaption} % Provides a means of using facilities analagous to those of the caption package, when writing captions for subfigures and the like.
+
+% % En­sure all floats for a sec­tion ap­pear be­fore the next \sec­tion com­mand
+% \usepackage[section]{placeins} % De­fines a \FloatBar­rier com­mand be­yond which floats may not pass
+
+\usepackage{tabularx} % Additional column designator X
+\usepackage{booktabs} % Provides commands for prettier tables such as \toprule, \addlinespace
+\usepackage{threeparttable} % Tables with footnotes
+\usepackage{makecell}
+\usepackage{multirow}
+
+\newenvironment{nonfloat}[1][\columnwidth]{%
+    \trivlist\item\relax\begin{minipage}{#1}%
+    % trivlist for spacing https://texblog.net/latex-archive/floats/center-centering/
+}{%
+    \end{minipage}\endtrivlist
+}
+
+% TODO:
+% \usepackage{subfloat}
+% \usepackage{varwidth}
+
+\usepackage{tikz}
+\usetikzlibrary{%
+    ,calc%
+    ,shapes.geometric%
+    ,arrows%
+    ,chains%
+    ,positioning%
+    ,scopes%
+    ,decorations.pathreplacing%
+}
+\newcommand{\tikzmark}[1]{\tikz[overlay,remember picture] \node (#1) {};}
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+
+
+% 
+% ===============================================================
+
+
+% ===============================================================
+% Text typesetting
+% ===============================================================
+
+\usepackage[normalem]{ulem} % provides various  types of underlining that can stretch between words and be broken across lines.
+\renewcommand{\ULdepth}{1.5pt} % adjust depth of underline manually 
+\let\textul\uline
+
+
+% 
+% ===============================================================
+
+
+
+% ===============================================================
+% Equation typesetting
+% ===============================================================
+% 
+
+% Replace * in math environment with `\cdot`, use `\ast´ for the symbol
+\mathcode`\*="8000
+{\catcode`\*\active\gdef*{\cdot}}
+
+\usepackage{amsmath}    % Improve structure and output of mathematical equations, e.g. \align
+\usepackage{mathtools}  % Extension package to amsmath
+\usepackage{amssymb}    % Provides an extended symbol collection 
+% \usepackage{isomath}    % Provides tools for a mathematical style that conforms tothe International Standard ISO 80000-2
+\usepackage{cancel}     % Provides \cancel{} and \bcancel{} to cross out parts of an equation
+
+\usepackage{diffcoeff} % Package to ease the writing of differential coefficients
+\diffdef{}{%
+    ,op-symbol = \mathrm{d}%
+    ,op-order-sep = 0 mu%
+}%
+\newcommand{\dd}[1]{\,\dl #1} % Automatic spacing for differential in integrals
+
+% Define delimiting macros that 
+%   \parens{…} which automatically adjusts the height,
+%   \parens*{…}, which doesn't adjust the height,
+%   and i.e., \parens[\bigg]{…}, which result in the size you specified.
+% 
+% https://tex.stackexchange.com/questions/94410/easily-change-behavior-of-declarepaireddelimiter
+\usepackage{mleftright,xparse}
+\NewDocumentCommand\xDeclarePairedDelimiter{mmm}
+ {%
+  \NewDocumentCommand#1{som}{%
+   \IfNoValueTF{##2}
+    {\IfBooleanTF{##1}{#2##3#3}{\mleft#2##3\mright#3}}
+    {\mathopen{##2#2}##3\mathclose{##2#3}}%
+  }%
+ }
+\xDeclarePairedDelimiter{\set}{\lbrace}{\rbrace}
+\xDeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\xDeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\xDeclarePairedDelimiter{\eval}{.}{\rvert}
+\xDeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\xDeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
+% Real Part and Imaginary Part
+\xDeclarePairedDelimiter{\curlybraces}{\lbrace}{\rbrace}
+\renewcommand{\Re}{\operatorname{Re}\curlybraces}
+\renewcommand{\Im}{\operatorname{Im}\curlybraces}
+
+\usepackage{esint}      % Provides additional integrals symbols including \oint, \iint
+\usepackage{tensor} 
+\usepackage{textgreek} % Pro­vides text symbols for Greek letters
+\usepackage[version=4]{mhchem} % Add easy chemical equations
+\usepackage{centernot} % Provides \centernot command to create negated symbols
+
+\usepackage{eurosym}    % Provides euro symbol \euro
+\usepackage{siunitx}
+\sisetup{%
+    ,per-mode = symbol-or-fraction % symbol for in-line , fraction for \displaystyle
+    ,range-phrase = % for \numrange and \SIrange
+        \ifmmode\text{\,\textendash\,}
+        \else
+        \thinspace\textendash\thinspace
+        \fi%
+    ,range-units = single % unit only after second number
+    ,product-units = single % unit only at last number
+    ,list-units = single % unit only after last numer
+    ,exponent-product = \cdot % product sign for \num{1e3}
+    ,output-product = \cdot % symbol used for products
+    ,output-decimal-marker = {\varDecimalMarker} % decimal marker
+    % ,inter-unit-product = \ensuremath{{}\cdot{}}, % separator between each unit
+    ,sticky-per = true  % make \per apply to all subsequent units.
+    ,math-ohm = \Omega % \ohm symbol
+    ,binary-units = true % \bit \byte and binary prefixes \kibi \mebi
+    % ,exponent-to-prefix = true % attempt to convert any exponents in quantities into unit prefixes
+    % ,zero-decimal-to-integer % convert decimals to integers if the decimal part is zero (wollte 89,0 nOhmMeter darstellen)
+    ,input-protect-tokens=\dots
+}
+
+% Add units (not necessarily SI-units)
+\DeclareSIUnit{\Wp}{W_p}         % Watt peak
+\DeclareSIUnit{\kWp}{kW_p}       % Kilowatt peak
+\DeclareSIUnit{\VA}{VA}          % Volt Ampere (apparent power)
+\DeclareSIUnit{\kWH}{kWh}
+\DeclareSIUnit{\Wh}{Wh}
+\AtBeginDocument{\DeclareSIUnit{\kWh}{kWh}} % Interpret kWh as a combine unit
+\DeclareSIUnit{\Ah}{Ah}
+\DeclareSIUnit{\mAh}{mAh}
+\DeclareSIUnit{\As}{As}
+\DeclareSIUnit{\Vs}{Vs}
+
+\DeclareSIUnit{\sqm}{\m\squared} % Square meters
+\DeclareSIUnit{\sr}{\steradian}
+
+\DeclareSIUnit\Molar{\textsc{m}}
+
+\DeclareSIUnit{\EUR}{\text{\euro}}  % Euro symbol (eurosym package)
+
+\DeclareSIUnit{\inch}{in}
+\DeclareSIUnit{\ft}{ft}
+
+\DeclareSIUnit\year{a}
+
+\usepackage{icomma}	% Proper spac­ing in dec­i­mal num­bers and math­e­mat­i­cal ex­pres­sions for comma as the decimal separator
+\usepackage{nicefrac} % Provides \nicefrac{} to typeset fractions form 'a/b'
+
+\usepackage{bm}
+\newcommand{\mat}[1]{\bm{#1}}
+
+
+% Define shorter versions of \iff \implies \impliedby
+% https://tex.stackexchange.com/questions/472720/spacing-of-relation-and-operation-symbols-with-propositions
+\newcommand*\mathmeta[1]{\DOTSB\mathchoice{\;#1\;}{#1}{#1}{#1}}
+\newcommand*\newmetasymbol[2]{\newcommand#1{\DOTSB\mathmeta{#2}}}
+\newcommand*\renewmetasymbol[2]{\renewcommand#1{\DOTSB\mathmeta{#2}}}
+\renewmetasymbol\implies{\Rightarrow}
+\renewmetasymbol\impliedby{\Leftarrow}
+\renewmetasymbol\iff{\Leftrightarrow}
+\newmetasymbol\nimplies{\nRightarrow}
+\newmetasymbol\nimpliedby{\nLeftarrow}
+\newmetasymbol\niff{\nLeftrightarrow}
+
+\newcommand*{\integerset}{\mathbb{Z}}
+
+
+% 
+% ===============================================================
+
+
+% ===============================================================
+% Code typesetting
+% ===============================================================
+% 
+
+% Typesetting source code is done with the listings-package or the minted-package except for Matlab-Code, which is always done using the listings-package and the matlab-prettifier-package. Therefore, the listings-package is always loaded, the minted-package only if \varMintedListings is true
+
+% Define box around code listings using the tcolorbox-package
+\usepackage{tcolorbox}
+\newtcolorbox{listingsbox}{%
+    ,lowerbox=ignored % Dont use lower part of tcolorbox
+    ,boxrule=0.5pt
+    ,arc=0mm
+    ,standard jigsaw
+    ,opacityframe=1
+    ,opacityback=0
+    ,boxsep=0pt
+    ,bottom=5pt
+    ,top=5pt
+    ,before skip=\abovedisplayskip
+    ,after skip=\belowdisplayskip
+    ,left skip=\leftlistingsskip %
+}%
+
+\usepackage{listings}
+\usepackage{lstautogobble} % Provides option for automatic gobble handling of for listings
+\lstset{%
+        ,basicstyle=\ttfamily					% teletype writer font
+        ,columns=fullflexible,keepspaces=true 	% to make letter spacing same as verbatim 
+        ,upquote=true
+        ,breaklines=true
+        ,postbreak=\raisebox{1pt}{\hspace{-17pt}\color{black}\tiny$\hookrightarrow$\space\space} % mimick minted line break style
+        ,autogobble % option provided lstautogobble-packages for automatic handling of gobble
+        % 
+        % ,numbersep=5pt % distance between number and listing
+        % ,backgroundcolor=\color{blue!10} % for use without tcolorbox
+        % ,xleftmargin=30pt, % for use without tcolorbox
+        % ,frame=tlbr,framesep=2pt,framerule=.5pt % frame
+        % ,belowskip=0pt % resolves the following problem: using paragraph with "skipped" of indented paragraph style causes unwanted additional vertical space after listings environment
+        % 
+        ,aboveskip=-3pt % for use with tcolorbox
+        ,belowskip=-3pt % for use with tcolorbox
+    }
+
+\usepackage{matlab-prettifier} % provides "Matlab-editor"-style for listings package to replicate Matlab editor syntax highlighting
+\def\matlabcode{\lstinline[style=Matlab-editor]}                    % Inline Matlab code
+\lstnewenvironment{matlablisting}[1][]{\lstset{style=Matlab-editor,#1}}{}   % Matlab code listing
+\BeforeBeginEnvironment{matlablisting}{\begin{listingsbox}}         % Add tcolorbox to Matlab code listings
+\AfterEndEnvironment{matlablisting}{\end{listingsbox}}              %
+
+\ifdefstring{\varMintedListings}{true}{%
+    \usepackage[cache=\varCacheHighlightedCode]{minted}
+    \setminted{%
+        ,breaklines
+        ,breakafter=\\-/
+        ,autogobble
+    }%
+
+    % Create custom versions for minted environment: \newminted[macro name]{language}{options} 
+    \newminted[codelisting]{text}{}
+    \newminted[pythonlisting]{python}{} 
+    \newminted[latexlisting]{tex}{} 
+    \newminted[rstlisting]{rst}{}
+
+    % Create custom versions of \mintinline: \newmintinline[macro name]{language}{options} 
+    \newmintinline[code]{text}{}                % Generic code
+    \newmintinline[pythoncode]{python}{}        % Python code
+    \newmintinline[latexcode]{tex}{}            % LaTeX code
+    \newmintinline[rstcode]{rst}{}             % reStructuredText code
+
+    % Add tcolorobox to minted listing
+    \BeforeBeginEnvironment{minted}{
+        \begin{tcolorbox}[%
+            ,boxrule=0.5pt
+            ,arc=0mm
+            ,standard jigsaw
+            ,opacityframe=1
+            ,opacityback=0
+            ,boxsep=0pt
+            ,bottom=5pt
+            ,top=5pt
+            ,before skip=\abovedisplayskip
+            ,after skip=\belowdisplayskip
+            ,left skip=30pt %
+        ]%
+    }%
+    \AfterEndEnvironment{minted}{\end{tcolorbox}}%
+}{%
+    % Create custom versions for \lstinline: \def\commandname{\lstinline[]}
+    \def\code{\lstinline[keywordstyle={}]} % Generic code
+    \def\pythoncode{\lstinline[language=python]} % Python code
+    \def\latexcode{\lstinline[language=tex]} % LaTeX code
+
+    % Create custom versions for lstlisting environment: \lstnewenvironment{name}[number][opt. default arg.]{starting code}{ending code}
+    \lstnewenvironment{codelisting}{}{} 
+    \lstnewenvironment{pythonlisting}{\lstset{language=python}}{} 
+    \lstnewenvironment{latexlisting}{\lstset{language=tex}}{} 
+
+    % Add tcolorobox to lstlistings listing
+    \BeforeBeginEnvironment{codelisting}{\begin{listingsbox}}%
+    \AfterEndEnvironment{codelisting}{\end{listingsbox}}%
+    \BeforeBeginEnvironment{pythonlisting}{\begin{listingsbox}}%
+    \AfterEndEnvironment{pythonlisting}{\end{listingsbox}}%
+    \BeforeBeginEnvironment{latexlisting}{\begin{listingsbox}}%
+    \AfterEndEnvironment{latexlisting}{\end{listingsbox}}%
+}%
+
+% % For inline listing with colored background:
+% % Only relevant for listings-package, does not work properly inside ifdefstring-argument
+% % Patch \lstinline to have a colored background with the same height independent of which characters are used
+% % Source: https://tex.stackexchange.com/questions/408878/adjust-the-padding-provided-by-colorbox-macro-from-the-realboxes-package
+% \usepackage{xpatch} % Provides the commands \xpretocmd, \xapptocmd and \xpatchcmd
+% \usepackage{realboxes}
+% \makeatletter
+% \xpretocmd\lstinline
+% {%
+%     \bgroup\fboxsep=1.5pt
+%     \Colorbox{blue!10}\bgroup\kern-\fboxsep\vphantom{\ttfamily\char`\\y}%
+%     \appto\lst@DeInit{\kern-\fboxsep\egroup\egroup}%
+% }{}{}
+% \makeatother
+
+% 
+% ===============================================================
+
+
+% ===============================================================
+% Quotes
+% ===============================================================
+
+% Provide advanced facilities for inline and display quotations including \enquote
+\iflanguage{ngerman}{
+    \usepackage[%
+        autostyle=true,% Adapts quote style to the current document language
+        german=quotes
+    ]{csquotes}
+}{%
+    \iflanguage{english}{
+        \usepackage[% Use english=american for single inner and double outer quotes, english=british for vice verca
+            autostyle=true,
+            english=american
+        ]{csquotes}
+    }{%
+        \usepackage[autostyle=true]{csquotes}
+    }
+}%
+% 
+% ===============================================================
+
+% ===============================================================
+% Footnotes
+% ===============================================================
+% 
+% \renewcommand{\thefootnote}{(\roman{footnote})} % Set number styles to lowercase roman: (i), (ii)
+
+\usepackage[%       % customize footnotes
+    ,bottom%        % force footnotes to very bottom of page
+    ,hang%          % flush footnote marker to the left margin of the page
+    ,flushmargin%   % flush text to the left margin of the page
+]{footmisc}
+
+% Avoid bottom floats on pages with footnotes
+% https://tex.stackexchange.com/questions/436004/avoid-bottom-floats-on-pages-with-footnotes
+\toks0{\ifvoid\footins\else\suppressfloats[b]\fi}
+\output\expandafter{\the\toks0\the\output}
+
+% 
+% ===============================================================
+
+
+% ===============================================================
+% Exemplary facilities
+% ===============================================================
+% 
+\usepackage{blindtext}
+\usepackage{mwe}
+\usepackage{layout}
+% 
+% ===============================================================
+
+
+% ===============================================================
+% Selective text (for confidential content)
+% ===============================================================
+% 
+\usepackage{comment} % Selectively in/exclude pieces of text
+
+% The following defines an confidential-environment. Content placed in this environment is displayed based on the value of \varIsConfidential. Additionally, for inline confidential content, the \confid{} command is defined.
+\ifdefstring{\varIsConfidential}{true}{%
+    \includecomment{confidential}
+    \newcommand{\confid}[1]{#1}
+}{%
+    \excludecomment{confidential}
+    \newcommand{\confid}[1]{\texttt{CONFIDENTIAL}}
+}%
+
+% Define sources-environment where all text is discarded
+\excludecomment{sources}
+
+% ===============================================================
+
+
+% ===============================================================
+% PDF features
+% ===============================================================
+% 
+
+% TODO:
+% \usepackage{xr-hyper} % cross reference external files with \externaldocument{}, load before hyperref
+
+\ifdefstring{\varUseHyperref}{true}{
+    \usepackage{hyperref}       % Provides features such as bookmarks and hyperlinks, should be last package to be loaded 
+    \hypersetup{%               % Setup hyperref-package
+        pdftitle={\varTitle},%
+        pdfsubject={\varSubject},%
+        pdfauthor={\varAuthorGiven{} \varAuthorFamily{}},%
+        pdfkeywords={\varKeywords},%
+        % 
+        colorlinks=true,        
+        linkcolor=black, 
+        citecolor=black, 
+        urlcolor=black,
+        pdfstartview=Fit, %FitH, FitB	
+        %plainpages=false
+        % 
+        % bookmarks,%             % Create bookmarks
+        bookmarksopen=true,%    % Unfold bookmatk tree in PDF viewer when document is opened
+        bookmarksopenlevel=1,   % Level of unfolding
+        bookmarksnumbered=true, % Number bookmarks
+        hidelinks,              % Do not highlight hyperlinks -- looks ugly
+    % Ansicht beim öffnen
+        plainpages=false,       % See manual...
+    }    
+
+    % Not really sure about advantages
+    \ifdefstring{\varIsDraft}{true}{%
+        \pdfcompresslevel=0
+    }{%
+        \pdfcompresslevel=9
+    }%
+}{
+    \newcommand{\texorpdfstring}[2]{#1} % define hyperref command
+    
+    \usepackage{url} % provides \url command (also provided by hyperref)
+}%
+
+%
+% ===============================================================
+
+
+% ===============================================================
+% Glossary
+% ===============================================================
+
+\usepackage[%
+    ,toc=true%                      % add the glossaries to the table of contents
+    ,nonumberlist%                  % suppress the number lists (page/s of occurence) in the glossaries 
+    ,nomain%                        % suppresses the creation of the main glossary and associated glo file
+]{glossaries-extra}                 % Create glossaries, lists of acronyms, list of symbols
+% The glossaries package should be loaded after the hyperref package
+
+
+% Add unit-column to symbols list
+% https://www.dickimaw-books.com/gallery/?label=sample-units2
+% https://tex.stackexchange.com/questions/192336/add-custom-key-to-display-units-in-glossary-with-siunitx?noredirect=1
+% https://tex.stackexchange.com/questions/269565/glossaries-how-to-customize-list-of-symbols-with-additional-column-for-units
+
+% Define custom keys for glossary entries with:
+%   glsaddkey{key}{default value}{no link cs}{no link ucfirst cs}{link cs}{link ucfirst cs}{link allcaps cs}
+
+% Key that indicates the unit for a symbol
+\glsaddkey{unit}{}{\glsentryunit}{\GLsentryunit}{\glsunit}{\Glsunit}{\GLSunit}
+\glssetnoexpandfield{unit} % turn off expansion for unit field
+% https://tex.stackexchange.com/questions/389976/siunitx-abbreviations-dont-work-inside-glossaries-entries
+% siunitx unit abbreviation commands like \V cannot be processed in the preamble, solution see link
+
+% 
+% ===============================================================
+
+
+\usepackage{scrhack} % Solve compatibility issues
+
+% Adjustments for \parindent and \parskip
+\ifdefstring{\varParskip}{false}{%
+	\setlength{\parindent}{1.5em} % Set paragraph indentation length (default: 1em)
+}{%
+    % Prevent parskip-option to add spacing at headings
+
+    % Solution working across all headings:
+    \usepackage{xpatch}
+    \xapptocmd{\sectionlinesformat}{\vspace*{-\parskip}}{}{}
+
+    % Alternatives that didn't work as well
+    
+    % \RedeclareSectionCommand[
+    % beforeskip=3.3\baselineskip,
+    % afterskip=.725\baselineskip plus .115\baselineskip minus .192\baselineskip
+    % ]{chapter}
+
+    % \RedeclareSectionCommand[
+    % beforeskip=-2ex plus -1ex minus -.2ex
+    % ]{section}
+
+    % \RedeclareSectionCommands[
+    % beforeskip=-1.75ex plus -1ex minus -.2ex
+    % ]{subsection,subsubsection}
+}%
+
+% Alternative to \nicefrac which  diplay style: https://tex.stackexchange.com/questions/515264/nicefrac-or-xfrac-in-displaystyle
+\newcommand{\altfrac}[2]{\ifmmode\def\tmp{$}\else\def\tmp{}\fi\mbox{%
+    {\raisebox{.24\ht\strutbox}{\tmp#1\tmp}}%
+    \kern-2.2pt\scalebox{1.6}[1.5]{/}\kern-1.8pt%
+    {\tmp#2\tmp}%
+    }}

@@ -1,0 +1,8 @@
+% I wasn't able to put the following commands in a \newcommand without error messages. This is part of a workaround that defines a \newcommand{\startappendix}{\input{appendix/startAppendix}} (defined in preamble/settings.tex) that uses \input to include the commands of this file. Introducing \startappendix keeps the style of the main-file consistent.
+
+\appendix
+\renewcommand*{\partformat}{} % Remove prefix on part page
+\renewcommand*{\addparttocentry}[2]{% Modify \addparttocentry to only print heading name
+    \addcontentsline{toc}{part}{#2}
+}% 
+\part{\appendixname}

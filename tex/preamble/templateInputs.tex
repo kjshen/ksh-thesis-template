@@ -1,0 +1,158 @@
+% !TeX root = ../main.tex
+
+% ===============================================================
+%
+% ksh-thesis-template
+% Temple Inputs
+%
+% ===============================================================
+
+% Input variable used in templateSettings.tex
+% Note that this template purposely does not use \newtoggle{} \newbool{} for boolean values.
+
+\newcommand{\varLanguage}{english,ngerman}
+% Declare all languages that will be needed in the document as comma separated list.
+% The *last* language is considered the main language:
+%   For German: ngerman
+%   For English: english
+%   For both German (main) and English: english,ngerman
+
+\newcommand{\varIsDraft}{true}
+% If the document is still in draft phase use 'true',
+% if it is ready for submission use 'false'.
+% The title page of a draft is marked as such, 
+% a corresponding water mark is added on all other pages and
+% overfull boxes (in margin space) are marked with black boxes.
+
+\newcommand{\varIsConfidential}{false}
+% Use 'true' if confidential content of the document shall be printed.
+
+\newcommand{\varPaperSize}{A4}
+% Possible formats include ISO formats A, B, C, and D, e.g. 'A4' and
+% American formats, e.g. 'letter', 'legal', 'executive'
+
+\newcommand{\varFontSize}{12pt}
+% Font size of the main text, e.g. '10pt', '11pt', '12pt'
+
+\newcommand{\varIsTwoSided}{true}
+% Set whether document is intended for two-sided printing by using 'true',
+% use 'false' for one-sided printing.
+
+\newcommand{\varSpecifyPageLayoutManually}{false}
+% Set how the document's page layout is determined.
+% Use 'true' to specify the page layout manually using the geometry package
+%   Use the \geometry{} command in customSettings.tex to set the desired layout
+% Use 'false' if the layout should be constructed automatically (recommended)
+%   It uses the values from
+%       \varBindingWidth
+%       \varDIV
+%   The exact method of the automatic page layout construction method can be
+%   found in scrguien.pdf: '2.2 Constructing the Type Area by Division'
+
+\newcommand{\varBindingWidth}{5mm}
+% Space occupied by book binding (e.g. glue binding, coil binding)
+% Only taken into account for two-sided documents
+% Not used for \varSpecifyPageLayoutManually = true
+
+\newcommand{\varDIV}{calc}
+% The DIV-factor specifies the number of strips into which the page is
+% divided horizontally and vertically during the page layout construction
+% Use a number '6', '7', ... '20', or 'calc'
+% Not used for \varSpecifyPageLayoutManually = true
+
+\newcommand{\varHasTwoColumns}{false}
+% Set one-column typsetting by using 'false' or
+% two-column typsetting by using 'true'.
+
+\newcommand{\varParskip}{half}
+% Set how the beginning of a new paragraph should be indicated.
+% For inter-paragraph spacing use (not recommended)
+%   'true' for one line vertical space or
+%   'half' for for half line vertical space.
+% For indentation in the first line without any vertical spacing use 'false' (recommended)
+% Inter paragraph spacing has the drawback of disappearing, for instance, after a displayed formula.
+
+\newcommand{\varBibFile}{SampleBib.bib}
+% File name of .bib-file (including filename extension)
+
+\newcommand{\varCitationStyle}{numeric-comp}
+% Select citation style for bibliography:
+% 'numeric' for [1] or [8, 3, 1, 7, 2]
+% 'numeric-comp' [1-3, 7, 8]
+% 'alphabetic' for [Jon95]
+% For more possible styles see biblatex documentation
+
+\newcommand{\varBibRefSegmentLevel}{none}
+% Biblatex reference segment level, allows you to print a local bibliography
+% with \printlocalbibliography[bibname]
+% Possible values:
+%   'none'
+%   'part'
+%   'chapter'
+% Currently, the other possible values need to be set directly
+% in ksh-thesis-template-settings.sty:
+%   'chapter+', 'section', 'section+', 'subsection', 'subsection+'
+
+\newcommand{\varUseColors}{true}
+% 'true' for colored output
+% 'false' for black and white output
+
+\newcommand{\varPrintLocalToC}{true}
+% Add local ToC for each chapter, 'true' or 'false'
+
+\newcommand{\varPrintChapterThumbs}{true}
+% Add chapter thumbs, 'true' or 'false'
+
+\newcommand{\varColorMainTheme}{0, 84, 159} %{30,103,182}
+% Color used for disposition elements in RGB,
+% e.g., "0, 84, 159" (RWTH blue in RGB) or "30,103,182".
+% Disposition elements include all sectioning command titles,
+% i.e. the arguments of \part down to \subparagraph and \minisec,
+% including the title of the abstract.
+
+\newcommand{\varColorThumb}{0, 84, 159} %{30,103,182}
+% Color used for chapter thumbs in RGB
+
+\newcommand{\varColorToC}{182, 82, 86} %{174,49,54}
+% Color used for local ToC and margin notes in RGB
+
+\newcommand{\varMintedListings}{true}
+% Select package for source code highlighting and typesetting
+% 'true' for minted-package
+% 'false for listings-package
+
+\newcommand{\varCacheHighlightedCode}{true}
+% If the minted package is used for code highlighting, select if highlighted code should be stored so that the code will not have to be highlighted again in the future. In most cases, caching will significantly speed up document compilation.
+% 'true' to cache
+% 'false to not cache
+
+\newcommand{\varUseHyperref}{true}
+% Enable or disable usage of hyperref package
+% 'true' to enable
+% 'false' to disable
+% Reason to disable hyperref: increase compilation speed
+
+
+\newcommand{\varDecimalMarker}{,}
+% Select decimal symbol, e.g.
+% ',' for non-English documents
+% '.' for English documents
+
+% Metadata (for title page and pdf-info)
+\newcommand{\varAuthorGiven}{Kai-Jimmy}
+\newcommand{\varAuthorFamily}{Shen}
+\newcommand{\varStudentNumber}{399999}
+\newcommand{\varTitle}{ksh-thesis-template}
+\newcommand{\varInstitute}{ISEA}
+\newcommand{\varSupervisor}{Maxime Musterfrau}
+\newcommand{\varThesisExaminerA}{Univ.-Prof. Dr. Dirk Uwe Sauer}
+\newcommand{\varThesisExaminerB}{Univ.-Prof. Dr. ir. Dr. h.c. Rik W. De Doncker}
+\newcommand{\varSubject}{Arbeitstyp}
+\newcommand{\varFieldOfStudy}{Elektrotechnik, Informationstechnik und technische Informatik}
+\newcommand{\varSubmissionMonth}{August}
+\newcommand{\varSubmissionYear}{2019}
+\newcommand{\varDraftDate}{\today}
+\newcommand{\varSubmissionTown}{Aachen}
+\newcommand{\varKeywords}{Leistungselektronik, Dual Active Bridge, Dreiphasig, Regelung, Modulationsverfahren, ...}
+% 
+% ===============================================================

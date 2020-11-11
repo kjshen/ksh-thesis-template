@@ -1,0 +1,524 @@
+\ProvidesPackage{kaijimath}
+
+% Eigennamen
+% ==========
+
+% C++
+% https://tex.stackexchange.com/questions/4302/prettiest-way-to-typeset-c-cplusplus
+\def\Cplusplus{{C\nolinebreak[4]\hspace{-.05em}\raisebox{.4ex}{\tiny\bf ++}}}
+
+% Mathworks Trademarks
+% https://de.mathworks.com/company/aboutus/policies_statements/trademarks.html
+% https://www.mathworks.com/content/dam/mathworks/mathworks-dot-com/support/books/members/pdfs/Trademark_Logo_Guidelines.pdf
+% https://de.mathworks.com/brand.html
+\newcommand{\MathWorks}{\textsf{MathWorks}\textsuperscript{\textregistered}}
+\newcommand{\Matlab}{\textsf{MATLAB}\textsuperscript{\textregistered}}
+\newcommand{\MATLAB}{\textsf{MATLAB}\textsuperscript{\textregistered}}
+\newcommand{\Simulink}{\textsf{Simulink}\textsuperscript{\textregistered}}
+
+% Tikz/PGF
+\newcommand{\TikZ}{Ti\textit{k}Z}
+\newcommand{\Tikz}{Ti\textit{k}Z}
+\newcommand{\PGF}{\textsc{pgf}}
+\newcommand{\Pgf}{\textsc{pgf}}
+\newcommand{\pgf}{\textsc{pgf}}
+\newcommand{\pgfplots}{\textsc{pgfplots}}
+\newcommand{\PGFPLOTS}{\textsc{pgfplots}}
+
+
+% Tabellen=======================================================
+% 
+
+% itemize-dot in table
+%https://tex.stackexchange.com/questions/150492/how-to-use-itemize-in-table-environment
+\newcommand{\tabitem}{~~\llap{\textbullet}~~}
+
+% custom column types
+\@ifpackageloaded{array}{%
+	\newcolumntype{L}{>{$\displaystyle}l<{$}} % math-mode version of "l" column type
+	\newcolumntype{C}{>{$\displaystyle}c<{$}} % math-mode version of "c" column type
+	\newcolumntype{R}{>{$\displaystyle}r<{$}} % math-mode version of "r" column type
+	\newcolumntype{M}[1]{>{$\displaystyle}m{#1}<{$}} % math-mode version of "m" column type
+	\newcolumntype{P}[1]{>{$\displaystyle}p{#1}<{$}} % math-mode version of "m" column type
+	\newcolumntype{B}[1]{>{$\displaystyle}b{#1}<{$}} % math-mode version of "m" column type			
+	%https://tex.stackexchange.com/questions/157389/how-to-center-column-values-in-a-table
+	\newcolumntype{\pC}[1]{>{\centering\arraybackslash}p{#1}} % centered version of "p" column type
+	\newcolumntype{\mC}[1]{>{\centering\arraybackslash}m{#1}} % centered version of "m" column type
+	\newcolumntype{\bC}[1]{>{\centering\arraybackslash}m{#1}} % centered version of "b" column type
+	\newcolumntype{\PC}[1]{>{\centering\arraybackslash\hspace{0pt} $\displaystyle} p{#1} <{$}} % centered math-mode version of "m" column type
+	\newcolumntype{\MC}[1]{>{\centering\arraybackslash\hspace{0pt} $\displaystyle} m{#1} <{$}} % centered math-mode version of "m" column type
+	\newcolumntype{\BC}[1]{>{\centering\arraybackslash\hspace{0pt} $\displaystyle} b{#1} <{$}} % centered math-mode version of "m" column type	
+	
+
+	\newcolumntype{Y}{>{\centering\arraybackslash}X}
+	% horizontally centered version of "X" column type
+
+
+	\newcolumntype{\Mragged}[1]{>{\raggedright\arraybackslash\hspace{0pt} $\displaystyle} m{#1} <{$}}
+
+	%https://tex.stackexchange.com/questions/78788/align-equations-over-multiple-tabular-rows
+	% \newcolumntype{A}{ >{$\displaystyle} r <{$} @{} >{$\displaystyle{}} l <{$}} % emulates a pair of align columns
+
+    \newcolumntype{a}[1]{r@{${}#1{}$}l}
+    \newcolumntype{A}[1]{R@{${}#1{}$}L}
+    \newcolumntype{\al}[1]{l@{${}#1{}$}l}
+	% \newcolumntype{\ALL}{>{$\displaystyle}l<{$} @{} >{$\displaystyle{}} l <{$} }
+    % \newcolumntype{\ARR}{>{$\displaystyle}r<{$} @{} >{$\displaystyle{}} r <{$} }
+}{}
+
+% 
+% Tabellen=======================================================
+
+% Text===========================================================
+% 
+
+% bold small capitals (lmodern doesnt provide bold sc letters)
+% https://tex.stackexchange.com/questions/367230/lmodern-package-with-small-caps-in-headlines/367231
+% https://tex.stackexchange.com/questions/5175/small-digits-for-small-caps
+\newcommand{\textbfsc}[1]{\fontfamily{cmr}\textsc{\textbf{#1}}}
+
+% fake small capitals
+% https://tex.stackexchange.com/questions/230334/small-caps-in-description-label
+\newcommand\fauxsc[1]{\fauxschelper#1 \relax\relax}
+\def\fauxschelper#1 #2\relax{%
+  \fauxschelphelp#1\relax\relax%
+  \if\relax#2\relax\else\ \fauxschelper#2\relax\fi%
+}
+\def\Hscale{.85}\def\Vscale{.72}\def\Cscale{1.10}
+\def\fauxschelphelp#1#2\relax{%
+  \ifnum`#1>``\ifnum`#1<`\{\scalebox{\Hscale}[\Vscale]{\uppercase{#1}}\else%
+    \scalebox{\Cscale}[1]{#1}\fi\else\scalebox{\Cscale}[1]{#1}\fi%
+  \ifx\relax#2\relax\else\fauxschelphelp#2\relax\fi}
+
+% text in footnotesize, scriptsize
+\newcommand{\textfn}[1]{{\footnotesize{#1}}}
+\newcommand{\textss}[1]{{\scriptsize{#1}}}
+
+% Gänsefüßchen germanquote
+\newcommand{\gqq}[1]{\glqq{}#1{}\grqq{}}
+\newcommand{\gq}[1]{\glq{}#1{}\grq{}}
+
+% Gerade Apostrophe
+\newcommand{\qs}[1]{\textquotesingle{}#1\textquotesingle{}}
+\newcommand{\qss}[1]{\textquotedbl{}#1\textquotedbl{}}
+
+%
+% Text===========================================================
+
+
+% Code===========================================================
+% 
+
+% \definecolor{mygrey}{rgb}{0.8,0.8,0.8}
+
+% % Graue Hinterlegung und typewriter font für inline code
+% % Vorteil gegenüber \colorbox: graue Hinterlegung immer gleich hoch
+% % Quelle: https://tex.stackexchange.com/questions/140166/making-inline-code-printing-pretty
+% \usepackage{tikz}
+% \newcommand\code[2][]{%$\!\!$
+%     \tikz[baseline=(s.base)]{
+%         \node(s)[
+%             fill=blue!10,             % background color
+% 	 		%draw=blue!50,            % border of box
+%             inner xsep = 2pt, % 3pt   % horizontal space between text and border
+%             inner ysep = 0pt,         % vertical space between text and border
+%             text height= 2ex, % 2.2ex % height of box
+%             text depth = 0.7ex, % 1ex % depth of box
+%             #1                        % other options
+%         ]{\texttt{#2}};
+%     }%$\!\!
+% }
+% %Alternative
+% %\definecolor{codegray}{gray}{0.9}
+% %\newcommand{\codex}[1]{\colorbox{blue!10}{\texttt{#1}}}
+
+%
+% Code===========================================================
+
+
+% Formatierung===================================================
+% 
+
+% Set margin where <arg> is the distance you want to include on the margin (the first one defines the right-hand side margin, and the second defines the left-hand side one).
+% \begin{changemargin}{<arg>}{<arg>} 
+% \end{changemargin}
+% This is exactly how the command
+% \begin{quote}
+% \end{quote}
+% is defined, but with the set to 1cm
+\def\changemargin#1#2{\list{}{\rightmargin#2\leftmargin#1}\item[]}
+\let\endchangemargin=\endlist 
+
+% 
+% Formatierung===================================================
+
+
+
+% Operators======================================================
+% 
+
+% Vektorpfeil mit ausreichend Abstand für ein Apostroph
+% https://tex.stackexchange.com/questions/120029/how-to-typeset-a-primed-vector
+\newcommand{\pvec}[1]{\vec{#1}\mkern2mu\vphantom{#1}}
+
+
+% unsichtbares Gleichzeichen 
+\newcommand{\eqph}{\mathrel{\hphantom{=}}}
+
+% slash fraction notation, sizes slash based on the size of the numerator and denominator.
+\newcommand{\slfrac}[2]{\left.#1\middle/#2\right.}
+
+\@ifpackageloaded{amsmath}{}{%
+\usepackage{amsmath}
+}
+
+% THD
+\DeclareMathOperator{\THD}{THD}
+
+% State of Charge
+\DeclareMathOperator{\SOC}{SOC}
+\DeclareMathOperator{\DOD}{DOD}
+
+% si-Funktion bzw. sinc
+\DeclareMathOperator{\sinc}{sinc}
+\DeclareMathOperator{\nsinc}{si}
+
+% Allgemeine Transformation
+\newcommand{\transform}{\operatorname{Tr}}
+% Laplace-Transformation
+\usepackage{mathrsfs}
+\newcommand{\laplacetransform}{\mathscr{L}}
+% z-Transformation
+\newcommand{\ztransform}{\mathcal{Z}}
+% Fourier-Transformation
+\newcommand{\fouriertransform}{\mathcal{F}}
+
+% Writing above and below a equal symbol simultaneously
+% If you wanted the equals sign alone to define the width of the stack, that can be done, by setting \def\useanchorwidth{T} prior to invocation. Afterwards \def\useanchorwidth{F} for default
+% https://tex.stackexchange.com/questions/123219/writing-above-and-below-a-symbol-simultaneously
+\newcommand\stackequal[2]{%
+  \mathrel{\stackunder[2pt]{\stackon[4pt]{=}{$\scriptscriptstyle#1$}}{%
+  $\scriptscriptstyle#2$}}}
+
+% Sollgleich
+\newcommand{\sollgleich}{\stackrel{!}{=} }
+
+% Gradient
+%\DeclareMathOperator{\grad}[ ]{\nabla_{#1}}
+
+% Divergenz
+\let\olddiv\div % Put LaTeX definition of \div in \divide
+\renewcommand{\div}{\operatorname{div}} % divergence operator
+
+% Rotation
+\DeclareMathOperator{\rot}{rot}
+
+% Rechteckfunktion
+\DeclareMathOperator{\rect}{rect}
+
+% Durchschnitt / Average/Mittelwert avg 
+\newcommand*\mean[1]{\overline{#1}}
+
+% Peak
+\newcommand*\peak[1]{\hat{#1}}
+
+% Complex
+\newcommand*\cmplx[1]{\underline{#1}}
+
+% Parallel zu
+\newcommand{\parbin}{\mathbin{\|}}
+
+%% Matrixoperatoren
+% Spur
+\DeclareMathOperator{\Spur}{Spur}
+% Rang
+\DeclareMathOperator{\Rang}{Rang}
+
+% Erwartungswert, Varianz, Kovarianz
+\DeclareMathOperator{\E}{E}
+\DeclareMathOperator{\Ex}{\mathcal{E}} % wie ET4 InfÜ Skript
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+
+% Entspricht
+% https://tex.stackexchange.com/questions/103408/symbol-for-corresponds-to-equals-sign-with-hat
+% benötigt listofitems.sty
+\usepackage{scalerel,stackengine,amsmath}
+\newcommand\equalhat{\mathrel{\stackon[1.5pt]{=}{\stretchto{%
+    \scalerel*[\widthof{=}]{\wedge}{\rule{1ex}{3ex}}}{0.5ex}}}}
+
+% Hantelsymbol (Transformationssymbol aus Originalbereich in Bildbereich)
+\newcommand{\tfh}{\mathrel{\mbox{\setlength{\unitlength}{0.1em}%
+					\begin{picture}(20,10)%
+					  \put(2,3){\circle{4}}%
+					  \put(4,3){\line(1,0){13}}%
+					  \put(18,3){\circle*{4}}%
+					\end{picture}%
+					}%
+				}%
+			}%
+
+\newcommand{\itfh}{\mathrel{\mbox{\setlength{\unitlength}{0.1em}%
+						\begin{picture}(20,10)%
+						  \put(2,3){\circle*{4}}%
+						  \put(3,3){\line(1,0){13}}%
+						  \put(18,3){\circle{4}}%
+						\end{picture}%
+					      }%
+				      }%
+		              }%
+
+\newcommand{\tfv}{\mbox{\setlength{\unitlength}{0.1em}%
+						\begin{picture}(5,20)%
+						  \put(3,2){\circle*{4}}%
+						  \put(3,4){\line(0,1){12}}%
+						  \put(3,18){\circle{4}}%
+						\end{picture}%
+				  }%
+		 	 }%
+
+\newcommand{\itfv}{\mbox{\setlength{\unitlength}{0.1em}%
+						\begin{picture}(5,20)%
+						  \put(3,2){\circle{4}}%
+						  \put(3,4){\line(0,1){12}}%
+						  \put(3,18){\circle*{4}}%
+						\end{picture}%
+					}%
+				}%
+
+% \newcommand{\ul}[1]{\underline{#1}} % use \cmplx instead, soul package has \ul definition not working in math mode
+\newcommand{\uvec}[1]{\underline{\vec{#1}}}
+
+% 
+% Operators======================================================
+
+% Variablen und spez. Konstanten=================================
+% 
+
+% Kapazität
+\newcommand{\cpcty}{C}        % Kapazität in Ah, capacity
+\newcommand{\cpctnce}{C}      % Kapazität in F, capacitance
+
+% Photovoltaik
+\newcommand{\FF}{\mathit{FF}} % Füllfaktor, fill factor
+\newcommand{\SR}{\mathit{SR}} % Spektrale Empfindlichkeit, spectral response
+\newcommand{\QE}{\mathit{QE}} % Quanteneffizienz
+\newcommand{\EQE}{\mathit{EQE}} % externe Quanteneffizienz
+\newcommand{\IQE}{\mathit{IQE}} % interne Quanteneffizienz
+\newcommand{\airmass}{\mathit{AM}} % interne Quanteneffizienz
+
+% Mathe
+\newcommand{\euler}{\mathrm{e}} % Euler'sche Zahl
+\newcommand{\imagj}{\mathrm{j}} % imaginäre Zahl für Etis
+\newcommand{\imagi}{\mathrm{i}} % imaginäre Zahl für Mathematiker
+\newcommand{\realr}{\mathrm{r}} % reale Zahl?
+\newcommand*{\transT}{{\mathsf{T}}} % Transposed T
+
+\usepackage{textcomp}
+\usepackage{textgreek} % Pro­vides text symbols for Greek letters
+\renewcommand{\pi}{\text{\textpi}}
+\newcommand{\circpi}{\text{\textpi}}   % Kreiszahl pi
+\newcommand{\rmalpha}{\text{\textalpha}}
+\newcommand{\rmbeta}{\text{\textbeta}}
+\newcommand{\rmtheta}{\text{\straighttheta}}   % Kreiszahl pi
+\newcommand{\rmsigma}{\text{\textsigma}}
+
+% Physik
+\newcommand{\elmchrg}{q_\mathrm{e}}         % Elementarladung, elementary charge
+\newcommand{\lghtspd}{c}                    % light speed, Lichtgeschwindigkeit
+\newcommand{\wavelen}{\lambda}              % wavelength, Wellenlänge
+\newcommand{\freq}{f}
+\newcommand{\planckc}{h}                    % planck constant, Plancksches Wirkungsquantum
+\newcommand{\planckcred}{\hbar}             % reduced planck constant, reduziertes Plancksche Wirkungsquantum
+
+% Halbleiter
+\newcommand{\elecconcn}{n}                  % electron concentration, Elektronenkonzentration
+\newcommand{\holeconcn}{p}                  % hole concenctration, Löcherkonzentration
+
+
+% Meteorologie
+\newcommand{\irrad}[1][]{E_{\mathrm{e}#1}}
+
+% Etechnik
+\newcommand{\turnsratio}{\ddot{u}} % Trafo Übertraungszahl
+
+% Norm n
+\newcommand{\normn}{\mathrm{n}}
+
+
+% 
+% Variablen und spez. Konstanten=================================
+
+
+% nicht-kursiver Text für math===================================
+% 
+
+% Indizies
+\newcommand{\avg}{\mathrm{avg}}
+\newcommand{\Nenn}{\mathrm{N}}
+\newcommand{\mech}{\mathrm{mech}}
+\newcommand{\kipp}{\mathrm{kipp}}
+\newcommand{\Motor}{\mathrm{Motor}}
+\newcommand{\Last}{\mathrm{Last}}
+\newcommand{\el}{\mathrm{el}}
+
+% Konstant
+\newcommand{\const}{\mathrm{const}}
+\newcommand{\konst}{\mathrm{konst}}
+
+% 
+% nicht-kursiver Text für math===================================
+
+
+
+% % SIUnitx=======================================================
+% % 
+% \@ifpackageloaded{siunitx}{%
+% 	% siunitx package options
+%     \iflanguage{ngerman}{\sisetup{locale = DE}}{}
+% 	\sisetup{%
+%         % ,locale = DE % typographic conventions of geographical area
+% 		,per-mode = symbol-or-fraction % symbol for in-line , fraction for \displaystyle
+% 		,range-phrase = % for \numrange and \SIrange
+%             \ifmmode\text{\,\textendash\,}
+%             \else
+%             \thinspace\textendash\thinspace
+%             \fi%
+% 		,range-units = single % unit only after second number
+%         ,product-units = single % unit only at last number
+% 		,list-units = single % unit only after last numer
+% 		,exponent-product = \cdot % product sign for \num{1e3}
+% 		,output-product = \cdot % symbol used for products
+% 		% ,output-decimal-marker = {,} % decimal marker % turn off for bilingual documents
+% 		% inter-unit-product = \ensuremath{{}\cdot{}}, % separator between each unit
+% 		,sticky-per = true  % make \per apply to all subsequent units.
+%         ,math-ohm = \Omega % \ohm symbol
+%         ,binary-units = true % \bit \byte and binary prefixes \kibi \mebi
+%         % ,exponent-to-prefix = true % attempt to convert any exponents in quantities into unit prefixes
+%         % ,zero-decimal-to-integer % convert decimals to integers if the decimal part is zero (wollte 89,0 nOhmMeter darstellen)
+%         ,input-protect-tokens=\dots
+% 	}
+
+% 	% Add units (not necessarily SI-units)
+%     \DeclareSIUnit{\sqm}{\m\squared} % Square meters
+% 	\DeclareSIUnit{\Wp}{W_p}
+%     \DeclareSIUnit{\VA}{VA}
+%     \DeclareSIUnit{\kWp}{kW_p}
+%     \AtBeginDocument{\DeclareSIUnit{\kWh}{kWh}} % Interpret kWh as a combine unit
+%     \DeclareSIUnit{\kWH}{kWh}
+%     \DeclareSIUnit{\Wh}{Wh}
+%     \DeclareSIUnit{\Ah}{Ah}
+% 	\DeclareSIUnit{\mAh}{mAh}
+%     \DeclareSIUnit{\As}{As}
+%     \DeclareSIUnit{\Vs}{Vs}
+
+
+% 	\DeclareSIUnit{\sr}{\steradian}
+
+%     \DeclareSIUnit\Molar{\textsc{m}}
+
+%     \usepackage{eurosym} % provides \euro
+% 	\DeclareSIUnit{\EUR}{\text{\euro}}
+
+% 	\DeclareSIUnit{\inch}{in}
+% 	\DeclareSIUnit{\ft}{ft}
+%     \DeclareSIUnit\year{a}
+% }{}
+% %
+% % SIUnitx=======================================================
+
+
+
+
+
+
+% ===== Formatting ===== %
+
+% "struts" for table height, i.e., elements that have height and/or depth but no width (and are thus invisible)
+\newcommand{\Tstrut}[1][2.9ex]{\rule{0pt}{#1}}            % "top" strut, provides vertical spacing above the line where it's placed
+\newcommand{\Bstrut}[1][-1.2ex]{\rule[#1]{0pt}{0pt}}   % "bottom" strut, provides vertical spacing below the line where it's placed
+\newcommand\TBstrut{\Tstrut\Bstrut}                 % "top and bottom" strut
+
+
+
+\@ifpackageloaded{glossaries}{%
+    % Anzeigen des Eintrags in der Form "abbrv (long)" durch \mygls (statt "long (abbrv)" mit \gls)
+    \newcommand*\mygls[2][]{\glsdisp[#1]{#2}{\glsentryshort{#2} (\glsentrylong{#2})}}
+    % Anzeigen des Eintrags in der Form "abbrv - dscrpt " durch \glsdash
+    \newcommand*\glsdash[2][]{\glsdisp[#1]{#2}{\glsentryshort{#2} -- \glsentrylong{#2}}}
+    % Nur Anzeigen der Abkürzung "abbrv" durch \glsdash
+    \newcommand*\glsabbrv[2][]{\glsdisp[#1]{#2}{\glsentryshort{#2}}}
+}{}
+
+
+% Bibliography===================================================
+% 
+
+\@ifpackageloaded{biblatex}{%
+	% Custom bib-entry type for standards
+	%https://tex.stackexchange.com/questions/65637/how-to-cite-a-standard-iso-etc-in-biblatex
+	% Further reading: %https://tex.stackexchange.com/questions/414974/which-modifications-have-to-be-done-to-use-textcite-to-cite-standards-inline
+	%https://tex.stackexchange.com/questions/207827/biblatex-how-can-i-make-printfieldnumber-just-print-the-number-figures-wi
+	\DeclareFieldFormat[standard]{month}{#1}
+	\DeclareBibliographyDriver{standard}{%
+	\usebibmacro{bibindex}%
+	\usebibmacro{begentry}%
+	\printfield{type}%
+	\setunit{\addspace}\newblock%
+	\printfield{number}%
+	\setunit{\addcolon}\newblock%
+	\printfield{year}%
+	\iffieldundef{month}{%
+		\setunit{\addspace}\newblock}%
+	{\setunit{-}}%
+	\printfield{month} %
+	\setunit{\addcomma\addspace} %
+	\usebibmacro{title}%
+	\usebibmacro{finentry}}
+}{}
+% 
+% Bibliography===================================================
+
+% Color==========================================================
+% 
+
+\@ifpackageloaded{xcolor}{%
+	\definecolor{goodgreen}{cmyk}{0.8,  0,1,0}
+	\definecolor{mediocre} {cmyk}{  0,  0,1,0.1}
+	\definecolor{badred}   {cmyk}{  0,  1,1,0}
+	\definecolor{matlabeditorcomment}{RGB}{34,139,34}
+	\definecolor{matlabeditorkeyword}{RGB}{0,0,255}
+	\definecolor{matlabeditorstring} {RGB}{181,81,243}
+}{}
+
+
+% 
+% Color==========================================================
+
+% Grafiken=======================================================
+% 
+
+% inline includegraphics
+%https://tex.stackexchange.com/questions/258299/embed-small-image-within-a-line-of-text
+\@ifpackageloaded{graphicx}{%
+	\usepackage{calc}
+	\newlength\inlineheight
+	\newlength\inlinedepth
+	\settototalheight\inlineheight{Xygp}
+	\settodepth\inlinedepth{Xygp}
+	\newcommand*\inlinegraphics[2][1]{%
+	\raisebox{-\inlinedepth}{\includegraphics[height=#1\inlineheight]{#2}}%
+	}
+}{}
+
+% 
+% Grafiken=======================================================
+
+% ===============================================================
+% 
+
+\usepackage{xcolor}
+\newcommand\mytodo[1]{\textcolor{red}{#1}}
+
+% 
+% ===============================================================

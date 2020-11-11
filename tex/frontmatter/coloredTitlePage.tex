@@ -1,0 +1,124 @@
+% !TeX root = ../main.tex
+
+% ===============================================================
+%
+% ksh-thesis-template
+% Colored Title page
+%
+% ===============================================================
+
+% Turn off inter-paragraph spacing for title page
+\KOMAoptions{parskip=false}
+
+% Command for thick underline
+% https://tex.stackexchange.com/questions/443439/underline-width
+\newcommand\dunderline[3][-1pt]{{%
+  \setbox0=\hbox{#3}
+  \ooalign{\copy0\cr\rule[\dimexpr#1-#2\relax]{\wd0}{#2}}}}
+
+\DeclareNewLayer[%
+    addheight=\headheight,%
+    background,%        % Display layer in the background only
+    page,%              % Layer spans the the whole paper 
+    contents={%
+        \color{ColorMainTheme}
+        \rule{\layerwidth}{\layerheight}
+    }%
+]{titlelayer}
+\DeclarePageStyleByLayers{emptytitle}{titlelayer}
+
+\begin{titlepage}
+\thispagestyle{emptytitle}
+
+\newgeometry{left=6cm} % Defines geometry of titlepage
+
+% Confidential ribbon
+\ifdefstring{\varIsConfidential}{true}{%
+    \newcommand{\stripskip}{3cm}
+    \newcommand{\stripwidth}{1.5cm}
+    \iflanguage{ngerman}{%
+        \newcommand{\striptext}{VERTRAULICH}
+    }{%
+        \newcommand{\striptext}{CONFIDENTIAL}
+    }%
+    \begin{tikzpicture}[
+        overlay, 
+        remember picture,
+        legend/.style={|<->|, gray, font = {\sffamily}},
+        confidential/.style={anchor=center, rotate = 45, font={\Large\ttfamily}}
+    ]
+        \coordinate (A) at ($ (current page.north west) + (\stripskip,0) $);
+        \coordinate (A') at ($(A) + (\stripwidth,0) $);
+
+        \coordinate (B) at ($ (current page.north west) - (0,\stripskip) $);
+        \coordinate (B') at ($(B) - (0,\stripwidth) $);
+
+        \fill [red] (A) -- (A') -- (B') -- (B) -- cycle;
+
+        \coordinate (tempA) at ($(A)!.5!(A')$);
+        \coordinate (tempB) at ($(B)!.5!(B')$);
+
+        \node [confidential](text) at ($(tempA)!.5!(tempB)$) {\striptext};
+
+        % \draw [legend] ($(A) + (0,-.75ex)$) -- ($(A') + (0,-.75ex)$) node [below, midway] {\textbackslash stripwidth};
+        % \draw [legend] ($(A) + (0,-.75ex)$) -- ($(current page.north east) + (0,-.75ex)$) node [below, midway] {\textbackslash stripskip};
+    \end{tikzpicture}
+}{}%
+
+\noindent
+\includegraphics[height=2cm]{SonnenwagenAachen_white}\\
+\color{white}
+\makebox[0pt][l]{\rule{\paperwidth}{1pt}}
+\par
+\noindent
+\textsf{\varAuthorFamily{}, \varAuthorGiven{}}
+% \textcolor{white}{\textsf{e.V.}}
+\vskip.45\paperheight
+\noindent
+{\huge \textsf{\varTitle}}
+\vskip\baselineskip
+\noindent
+\textsf{\varSubmissionMonth{} \varSubmissionYear}
+\vfill
+\ifdefstring{\varIsDraft}{true}{%
+    \Large\ttfamily\bfseries
+        \color{gray!20}
+        \iflanguage{ngerman}{%
+            \noindent Vorversion vom
+        }{%
+            \noindent Draft from
+        }%
+        \varDraftDate\dunderline{2pt}{\hphantom{M}}
+}{}%
+
+\end{titlepage}
+
+% Title back
+{%
+    \thispagestyle{empty}
+
+    \noindent Upper title back
+
+    \vfill
+
+    \noindent Lower title back\\
+    \iflanguage{ngerman}{
+        Dieses Dokument wurde mit \LaTeX{} erstellt.
+    }{
+        This document was created using \LaTeX.
+    }
+}%
+\pagebreak
+
+% Dedication
+{%
+    \thispagestyle{empty}
+    \noindent
+    \vspace{2cm}
+    \begin{center}
+    Dedication
+    \end{center}
+}%
+
+% Turn on chosen parskip option
+\KOMAoptions{parskip=\varParskip}

@@ -1,0 +1,153 @@
+% !TeX root = ../main.tex
+
+% ≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡
+\chapter{Blind Description}
+% ≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡
+
+\Blinddescription
+
+
+% ≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡
+\chapter{Blind Math}
+% ≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡
+
+\blindmathpaper
+
+
+% \minisec{Matlab Code}
+% \begin{matlablisting}
+% load example.mat        % Command syntax
+% load('example.mat')     % Function syntax
+% \end{matlablisting}
+
+% test \matlabcode{plot(x,y)} test
+
+
+% % https://tex.stackexchange.com/questions/31091/space-after-latex-commands
+%  a macro without arguments you should always invoke it with an empty statement after it, \verb|\LaTeX{}|. LaTeX ignores (typed) spaces directly after the macro (they just stop the scanning for the macro’s name). You need to break that
+
+
+
+% Often, if you want to know how to do something in \LaTeX, the fastest way is to search for it online before reading the LaTeX or package documentation. 
+
+
+
+
+
+% It is recommended that you compile your document frequently to detect any syntax errors that might have sneaked in. Searching for errors in your LaTeX document in a large document would prove to be a more time-consuming task.
+
+
+
+
+% % \lstinline|test illegal !"2@/$")"?= \so|
+
+% Beside the global table of contents, the user may choose to also print a local table of contents at the beginning of each chapter
+
+
+
+
+
+% Things to do when starting to use this template:
+% \begin{itemize}
+%     \item Customize the settings in \verb|tex/preamble/settings.tex|
+%     \item Empty \verb|tex/chapter| and populate it with you chapters. Add them in the main.tex file using \verb|\include{chapter/tbd}|
+%     \item Do the same for \verb|tex/preamble|, \verb|tex/appendix|
+%     \item If you already have a .bib file, replace the .bib file in \verb|tex/bibfile| and change the variable \verb|\varBibFile| in the settings
+%     \item If you've added folders to the \verb|\include{images/}| folder, make sure that you add them all to in the settings file under the \verb|\graphicspath{}| command
+% \end{itemize}
+
+
+
+
+
+% \section{Curly brace next to a body of text}
+% % https://tex.stackexchange.com/questions/1559/adding-a-large-brace-next-to-a-body-of-text
+% % https://tex.stackexchange.com/questions/299972/tikz-remember-picture-on-wrong-page
+
+% Make sure the drawing commands follow directly after the last \verb|\tikzmark| inside the (itemize, equation) environment to avoid having the it printed on the next page in case the list is close to the next page.
+
+% In Python, a function definition consists of the following:
+% \begin{itemize}
+%     \item test
+%     \item test
+%     \begin{samepage}
+%         \item the \pythoncode|def| keyword \tikzmark{2nd}
+%         \item the function name
+%         \item the parenthesized list of formal parameters \tikzmark{right}
+%         \item a colon \tikzmark{4th}
+%     \end{samepage}
+%     \begin{tikzpicture}[overlay, remember picture]
+%         \draw [decoration={brace,amplitude=0.5em},decorate,ultra thick,gray]
+%         ($(right)!(2nd.north)!($(right)-(0,1)$)$) --  ($(right)!(4th.south)!($(right)-(0,1)$)$);
+%     \end{tikzpicture}
+%     \item the function body (an indented block of statements)
+% \end{itemize}
+
+
+% % ===============================================================
+% %
+% \section{Quotations}
+% %
+% % ===============================================================
+
+% The author recommend's the usage of commands provided by the \texttt{csquotes}-package.
+
+% % ---------------------------------------------------------------
+% %
+% \subsection{Quoting Regular Text}
+% %
+% % ---------------------------------------------------------------
+
+% To quote a fairly short string -- whether a single word, a few words, or an entire sentence -- inline, you just surround it by the quotation marks. Use the \texttt{csquotes}-package's \verb|\enquote| command:
+
+% This command is context sensitive. Depending on the nesting level, it will toggle between outer and inner quotation marks with plain and nested quotations. The starred version of this command skips directly to the inner level. 
+
+% % ---------------------------------------------------------------
+% %
+% \subsection{Formal Quoting of Regular Text}
+% %
+% % ---------------------------------------------------------------
+
+% Formal quotations are typically accompanied by a citation indicating the source of the quoted text. The following command is an extended version of \verb|\enquote| which encloses the quoted piece of text in quotation marks and adds a citation after the quotation:
+% \begin{latexlisting}
+% \textquote[<cite>]{<text>}
+% \textquote*[<cite>]{<text>}
+% \end{latexlisting}
+% The \texttt{<text>} may be any arbitrary piece of text to be enclosed in quotation marks. The optional argument \texttt{<cite>} specifies the citation. For example:
+
+% \textquote[Henri Poincare]{%
+%     The mathematician does not study pure mathematics because it is useful; he studies it because he delights in it and he delights in it because it is beautiful.%
+% }
+
+% \textquote[\cite{Gueymard18}]{%
+%     The solar constant, obtained as the average of TSI over solar cycles 21–23, is determined as 1361.1 W/m 2.%
+% }
+
+% % ---------------------------------------------------------------
+% %
+% \subsection{Block Quoting of Regular Text}
+% %
+% % ---------------------------------------------------------------
+
+% % TODO: https://tex.stackexchange.com/questions/64371/direct-quotations-and-entire-paragraph-quotations
+
+% Formal requirements in academic writing frequently demand that quotations be embedded in the text if they are short but set off as a distinct and typically indented paragraph, a so-called block quotation, if they are longer than a certain number of lines or words. In the latter case no quotation marks are inserted. The following command deals with this requirement automatically:
+% \begin{latexlisting}
+% \blockquote[<cite>]{<text>}
+% \end{latexlisting}
+
+% Using \code{\SetBlockThreshold}, the number of lines the block quotation facilities use as a threshold when determining whether a quotation should be typeset in inline or in display mode. The default is three.
+
+% For example, while the quote from above is typset the same way 
+
+% \blockquote[Henri Poincaré]{%
+%     The mathematician does not study pure mathematics because it is useful; he studies it because he delights in it and he delights in it because it is beautiful.%
+% }
+
+% the famous minute-and-a-half long sentence of Donald Trump in 2016 (Republican presidential candidate at the time) during a campaing stop to criticize the nuclear deal that the Obama administration negotiated with Iran is indented:
+
+% \blockquote[Donald J. Trump]{%
+%     Look, having nuclear -- my uncle was a great professor and scientist and engineer, Dr. John Trump at MIT; good genes, very good genes, OK, very smart, the Wharton School of Finance, very good, very smart -- you know, if you're a conservative Republican, if I were a liberal, if, like, OK, if I ran as a liberal Democrat, they would say I'm one of the smartest people anywhere in the world -- it's true! -- but when you're a conservative Republican they try -- oh, do they do a number -- that's why I always start off: Went to Wharton, was a good student, went there, went there, did this, built a fortune -- you know I have to give my like credentials all the time, because we're a little disadvantaged -- but you look at the nuclear deal, the thing that really bothers me -- it would have been so easy, and it's not as important as these lives are (nuclear is powerful; my uncle explained that to me many, many years ago, the power and that was 35 years ago; he would explain the power of what's going to happen and he was right -- who would have thought?), but when you look at what's going on with the four prisoners -- now it used to be three, now it's four -- but when it was three and even now, I would have said it's all in the messenger; fellas, and it is fellas because, you know, they don't, they haven't figured that the women are smarter right now than the men, so, you know, it's gonna take them about another 150 years -- but the Persians are great negotiators, the Iranians are great negotiators, so, and they, they just killed, they just killed us.%
+% }
+
+% For more details, see csquotes.pdf

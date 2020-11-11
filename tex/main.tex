@@ -1,0 +1,66 @@
+% ===============================================================
+%
+% ksh-thesis-template
+% Main file
+%
+% ===============================================================
+
+\documentclass{scrbook}
+\input{preamble/templateInputs}
+\usepackage{ksh-thesis-template-settings}
+\input{preamble/customSettings}
+\input{preamble/hyphenation}
+\input{preamble/glossary}
+
+% Redundant `\addbibresource` command (biblatex) for VSCode + LaTeX-Workshop users
+\addbibresource{bibfile/SampleBib.bib}
+% If
+% 1) the file containing the \addbibresource{} command is not located inside the project folder, and
+% 2) the file name is not typed out but inside \varBibFile
+%  latex-workshop's intellisense completions for citations, i.e. when using cite{}, does not work. Could not make it work with latex-workshop.latex.bibDirs option.
+
+
+% You can use \includeonly to speed up processing by just typesetting specified chapters. Note that it will use old aux files for the other chapters to get the numbering correct. Thus, you should occasionally (and initially) process the file without \includeonly so that all chapters are processed and usable aux files are generated for each chapter.
+% \includeonly{} 
+
+\begin{document}
+    \frontmatter
+    % The front matter is used for title pages, preface, and table of contents.
+    % Page numbers are written as roman numerals.
+        \include{frontmatter/coloredTitlePage}
+        \include{frontmatter/preface}
+        \include{frontmatter/tableOfContents}
+
+    \mainmatter 
+    % Main text
+    % Page numbers are written as arabic numerals.
+        \include{chapter/tbd}
+
+        % \part{About this Template}
+        % \include{chapter/templatesettings}
+        
+        % \part{Tips on Writing Your Document with \LaTeX}
+        % \include{chapter/structure}
+        % \include{chapter/text}
+        % \include{chapter/figures}
+        % \include{chapter/tables}
+        % \include{chapter/mathematics}
+        % \include{chapter/listings}
+        % \include{chapter/references}
+
+        % \includePartPreamble{preamble/dummyPartPreamble}
+        % \part{Example Part}
+        % \include{chapter/exampleOutput1}
+
+    % \startappendix
+    % Appendix
+    % Chapter numbering includes letters
+        % \include{appendix/exampleAppendixA}
+        % \include{appendix/exampleAppendixB}
+
+    \backmatter
+    % The back matter is used for bibliography, index, glossary or the like.
+    % No chapter numbering is used.
+        % \include{backmatter/lists}
+        \layout
+\end{document}

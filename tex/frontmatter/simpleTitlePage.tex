@@ -1,0 +1,46 @@
+% !TeX root = ../main.tex
+
+% ===============================================================
+%
+% ksh-thesis-template
+% Simple Title page
+%
+% ===============================================================
+
+\DeclareNewLayer[background]{titlelayer}
+\DeclarePageStyleByLayers{emptytitle}{titlelayer}
+\titlehead{\thispagestyle{emptytitle}Kopf}
+\subject{Typisierung}
+\title{\varTitle}
+\subtitle{Untertitel}
+\author{\varAuthorGiven{} \varAuthorFamily}
+\date{}
+\publishers{%
+    \ifdefstring{\varIsDraft}{true}{%
+        \ifdefstring{\varLanguage}{german}{
+            V O R V E R S I O N
+        }{%
+            D R A F T
+        }%
+        \\
+        \makebox{}\\
+        (\varDraftDate)\\
+        Verlag
+    }{%
+        Verlag
+    }%
+}%
+\uppertitleback{Titelrückseitenkopf}
+\lowertitleback{%
+    Titelrückseitenfuß
+
+    \ifdefstring{\varLanguage}{german}{
+        Dieses Dokument wurde mit \LaTeX{} erstellt.
+    }{
+        This document was created using \LaTeX.
+    }
+}
+\dedication{Widmung}
+
+\maketitle
+\cleardoublepage

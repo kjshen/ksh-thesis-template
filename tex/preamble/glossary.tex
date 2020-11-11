@@ -1,0 +1,88 @@
+% !TeX root = ../main.tex
+
+% ===============================================================
+%
+% ksh-thesis-template
+% Glossary
+%
+% ===============================================================
+
+% The entries for the individual directories are defined here.
+% Please note the type parameter decides in which directory the term appears
+
+% ===============================================================
+% Abbreviations
+% ===============================================================
+% 
+% \newacronym{reluk}{Geschaltete Reluktanzmaschine}{{geschaltete Reluktanzmaschine}}
+% \newacronym{rwth}{RWTH}{{Rheinisch-Westfälische Technische Hochschule Aachen}}
+% \newacronym{isea}{ISEA}{{Institut für Stromrichtertechnik und elektrische Antriebe}}
+% \newacronym{pgs}{PGS}{{Institute for Power Generation and Storage Systems}}
+% \newacronym{nmc}{NMC}{{Lithium-Nickel-Mangan-Cobalt-Oxid}}
+% \newacronym{lfp}{LFP}{{Lithium-Eisen-Phosphat}}
+% \newacronym{nco}{nco}{{Lithium-Nickel-Cobalt-Oxid}}
+% \newacronym{lto}{lto}{{Lithium-Titanat (Li4Ti5O12)}}
+% \newacronym{lipf}{$\mbox{LiPF}_6$}{{Lithiumhexafluorophosphat}}
+
+% \glsaddall
+
+% 
+% ===============================================================
+
+%%=== Verzeichnis 2 (z.B. Symbolverzeichnis) ===
+
+% https://tex.stackexchange.com/questions/389976/siunitx-abbreviations-dont-work-inside-glossaries-entries
+% siunitx unit abbreviation commands like \V cannot be processed in the preamble, solution see link
+
+% \newglossaryentry{Lambda}{%
+%     type=symbolslist,
+%     name=$\Lambda$,
+%     description={Ionische Leitfähigkeit},
+%     sort=LeitI
+% }
+
+% allow siunitx symbol command such as \J
+% https://tex.stackexchange.com/questions/192336/add-custom-key-to-display-units-in-glossary-with-siunitx?noredirect=1
+% \glssetnoexpandfield{unit}
+
+% \newglossaryentry{Bandluecke}{%
+%     type=symbolslist,
+%     name=$E_\mathrm{g}$,
+%     unit={\si{eV}},
+%     description={Bandlücke, Index g aus Begriff \gqq{bandgap}},
+%     sort=Bandluecke
+% }
+
+% \newglossaryentry{intrKonz}{%
+%     type=symbolslist,
+%     name=$n_\mathrm{i}$,
+%     % unit={\si[per-mode=reciprocal]{\per\mole}},
+%     unit={\si{mol^{-1}}},
+%     description={intrinsische Ladungsträgerkonzentration},
+%     sort={intrinsische Bandluecke}
+% }
+
+% \newglossaryentry{FermiVerteilungElektronen}{%
+%     type=symbolslist,
+%     name=$f_\mathrm{e}$,
+%     unit={},
+%     description={Fermi-Verteilung von Elektronen},
+%     sort={Fermi Verteilung Elektronen}
+% }
+
+% \newglossaryentry{FermiVerteilungLoecher}{%
+%     type=symbolslist,
+%     name=$f_\mathrm{h}$,
+%     unit={},
+%     description={Fermi-Verteilung von Löcher, h für hole},
+%     sort={Fermi Verteilung Löcher}
+% }
+	
+%%=== Verzeichnis 3 (z.B. Fremdwortverzeichnis) ===
+
+%%\newglossaryentry{Portmonaie}{name=Portmonaie}{{frz. Wort für Geldbörse}, sort=Portmonaie, type=fremdwort}
+
+
+
+
+% \glsaddall

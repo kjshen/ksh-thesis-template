@@ -1,0 +1,30 @@
+% !TeX root = ../main.tex
+
+% ===============================================================
+%
+% ksh-thesis-template
+% Table of contents
+%
+% ===============================================================
+
+% Add entry for table of contents to pdf bookmark
+\ifdefstring{\varUseHyperref}{true}{%
+    \ifdefstring{\varLanguage}{german}{%
+        \pdfbookmark{Inhaltsverzeichnis}{toc}
+    }{%
+        \pdfbookmark{Table of Contents}{toc}
+    }%
+}{}%
+
+\tableofcontents    % Output table of contents
+\cleardoublepage    % Starts a new right-hand page in two-sided printing
+
+% For the scrbook class, the sectioning divisions included by default in the table of contents are all those from \part to \subsection. Whether or not to include a sectioning level in the table of contents is controlled by the tocdepth counter. This has the value -1 for \part, 0 for \chapter, and so on. By incrementing or decrementing the counter, you can choose the lowest sectioning level to include in the table of contents. Incidentally, the standard classes work the same way. With KOMA-Script you do not need to remember these values. KOMA-Script defines a \leveltocdepth command for each sectioning level with the appropriate value which you can use to set tocdepth. 
+% \setcounter{tocdepth}{\parttocdepth} 
+% \setcounter{tocdepth}{\sectiontocdepth} 
+% \setcounter{tocdepth}{\subsectiontocdepth} 
+% \setcounter{tocdepth}{\subsubsectiontocdepth} 
+% \setcounter{tocdepth}{\paragraphtocdepth} 
+% \setcounter{tocdepth}{\subparagraphtocdepth} 
+
+
